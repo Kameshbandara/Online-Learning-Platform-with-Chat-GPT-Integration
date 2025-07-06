@@ -1,4 +1,4 @@
-import { Navigate, Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import { Navigate, Route, BrowserRouter as Router, Routes, useLocation } from 'react-router-dom';
 import './App.css';
 import CourseList from './components/CourseList';
 import CreateCourse from './components/CreateCourse';
@@ -31,11 +31,23 @@ const InstructorRoute = ({ children }) => {
   return children;
 };
 
+// Component to conditionally render navbar
+const ConditionalNavbar = () => {
+  const location = useLocation();
+  const hideNavbarRoutes = ['/login', '/register'];
+  
+  if (hideNavbarRoutes.includes(location.pathname)) {
+    return null;
+  }
+  
+  return <Navbar />;
+};
+
 function App() {
   return (
     <Router>
       <div className="App">
-        <Navbar />
+        <ConditionalNavbar />
         <main className="min-h-screen bg-gray-50">
           <Routes>
             {/* Public Routes */}
