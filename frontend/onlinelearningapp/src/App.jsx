@@ -4,7 +4,7 @@ import CourseList from './components/CourseList';
 import CreateCourse from './components/CreateCourse';
 import Dashboard from './components/Dashboard';
 import Login from './components/Login';
-import MyCourse from './components/MyCourse';
+import MyCourse from './components/MyCourses';
 import Navbar from './components/Navbar';
 import Recommend from './components/Recommend';
 import Register from './components/Register';
