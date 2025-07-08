@@ -42,7 +42,7 @@ const Navbar = () => {
           <div className="flex items-center">
             <Link to="/" className="flex items-center">
               <img
-                src="/logo.png"
+                src="../assets/images/logo.png"
                 alt="Logo"
                 className="h-8 w-8 mr-3 rounded-full"
               />
@@ -136,7 +136,7 @@ const Navbar = () => {
           )}
 
           {/* Mobile menu button */}
-          <div className="md:hidden">
+          {/*<div className="md:hidden">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="text-gray-300 hover:text-white hover:bg-blue-700 inline-flex items-center justify-center p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
@@ -149,7 +149,7 @@ const Navbar = () => {
                 )}
               </svg>
             </button>
-          </div>
+          </div>*/}
         </div>
       </div>
 
