@@ -67,12 +67,15 @@ const Navbar = () => {
                   >
                     My Courses
                   </Link>
-                  <Link
-                    to="/recommendations"
-                    className={`px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${isActiveRoute('/recommendations')}`}
-                  >
-                    Recommendations
-                  </Link>
+
+                  {user?.role !== 'instructor' && (
+                    <Link
+                      to="/recommendations"
+                      className={`px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${isActiveRoute('/recommendations')}`}
+                    >
+                      Recommendations
+                    </Link>
+                  )}
                   {user?.role === 'instructor' && (
                     <>
                       <Link
@@ -173,13 +176,16 @@ const Navbar = () => {
                 >
                   My Courses
                 </Link>
-                <Link
-                  to="/recommendations"
-                  className={`block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 ${isActiveRoute('/recommendations')}`}
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Recommendations
-                </Link>
+                {user?.role !== 'instructor' && (
+                  <Link
+                    to="/recommendations"
+                    className={`block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 ${isActiveRoute('/recommendations')}`}
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Recommendations
+                  </Link>
+                )}
+                
                 {user?.role === 'instructor' && (
                   <>
                     <Link
