@@ -77,7 +77,7 @@ export default function CreateCourse() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center px-4">
+    <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center px-4 pt-24">
       <div className="bg-white rounded-lg shadow-md p-8 w-full max-w-2xl">
         <h1 className="text-2xl font-bold text-center text-gray-800 mb-6">Create a New Course</h1>
         

@@ -1,8 +1,15 @@
-import { Navigate, Route, BrowserRouter as Router, Routes, useLocation } from 'react-router-dom';
+import {
+  Navigate,
+  Route,
+  BrowserRouter as Router,
+  Routes,
+  useLocation
+} from 'react-router-dom';
 import './App.css';
 import CourseList from './components/CourseList';
 import CreateCourse from './components/CreateCourse';
 import Dashboard from './components/Dashboard';
+import Footer from './components/Footer'; // ✅ Import Footer
 import Login from './components/Login';
 import MyCourse from './components/MyCourses';
 import Navbar from './components/Navbar';
@@ -19,78 +26,86 @@ const ProtectedRoute = ({ children }) => {
 const InstructorRoute = ({ children }) => {
   const token = localStorage.getItem('token');
   const user = JSON.parse(localStorage.getItem('user') || '{}');
-  
-  if (!token) {
-    return <Navigate to="/login" />;
-  }
-  
-  if (user.role !== 'instructor') {
-    return <Navigate to="/courses" />;
-  }
-  
+
+  if (!token) return <Navigate to="/login" />;
+  if (user.role !== 'instructor') return <Navigate to="/courses" />;
   return children;
 };
 
-// Component to conditionally render navbar
-const ConditionalNavbar = () => {
+// ✅ Layout wrapper with Navbar and Footer (except on login/register)
+const Layout = ({ children }) => {
   const location = useLocation();
-  const hideNavbarRoutes = ['/login', '/register'];
-  
-  if (hideNavbarRoutes.includes(location.pathname)) {
-    return null;
-  }
-  
-  return <Navbar />;
+  const hideLayoutRoutes = ['/login', '/register'];
+  const shouldHideLayout = hideLayoutRoutes.includes(location.pathname);
+
+  return (
+    <>
+      {!shouldHideLayout && <Navbar />}
+      <main className="flex-grow bg-gray-50">{children}</main>
+      {!shouldHideLayout && <Footer />}
+    </>
+  );
 };
 
 function App() {
   return (
     <Router>
-      <div className="App">
-        <ConditionalNavbar />
-        <main className="min-h-screen bg-gray-50">
+      <div className="App flex flex-col min-h-screen">
+        <Layout>
           <Routes>
             {/* Public Routes */}
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/" element={<Navigate to="/courses" />} />
-            
+
             {/* Protected Routes */}
-            <Route path="/courses" element={
-              <ProtectedRoute>
-                <CourseList />
-              </ProtectedRoute>
-            } />
-            
-            <Route path="/my-courses" element={
-              <ProtectedRoute>
-                <MyCourse />
-              </ProtectedRoute>
-            } />
-            
-            <Route path="/recommendations" element={
-              <ProtectedRoute>
-                <Recommend />
-              </ProtectedRoute>
-            } />
-            
+            <Route
+              path="/courses"
+              element={
+                <ProtectedRoute>
+                  <CourseList />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/my-courses"
+              element={
+                <ProtectedRoute>
+                  <MyCourse />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/recommendations"
+              element={
+                <ProtectedRoute>
+                  <Recommend />
+                </ProtectedRoute>
+              }
+            />
+
             {/* Instructor Only Routes */}
-            <Route path="/dashboard" element={
-              <InstructorRoute>
-                <Dashboard />
-              </InstructorRoute>
-            } />
-            
-            <Route path="/create-course" element={
-              <InstructorRoute>
-                <CreateCourse />
-              </InstructorRoute>
-            } />
-            
-            {/* Catch all route */}
+            <Route
+              path="/dashboard"
+              element={
+                <InstructorRoute>
+                  <Dashboard />
+                </InstructorRoute>
+              }
+            />
+            <Route
+              path="/create-course"
+              element={
+                <InstructorRoute>
+                  <CreateCourse />
+                </InstructorRoute>
+              }
+            />
+
+            {/* Catch-all */}
             <Route path="*" element={<Navigate to="/courses" />} />
           </Routes>
-        </main>
+        </Layout>
       </div>
     </Router>
   );
