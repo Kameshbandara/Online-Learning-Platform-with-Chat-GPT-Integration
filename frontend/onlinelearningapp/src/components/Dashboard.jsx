@@ -35,7 +35,7 @@ const Dashboard = () => {
       
       setLoading(false);
     } catch (err) {
-      setError('Failed to fetch dashboard data');
+      //setError('Failed to fetch dashboard data');
       setLoading(false);
     }
   };

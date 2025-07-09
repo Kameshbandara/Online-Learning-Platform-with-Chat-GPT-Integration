@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import logo from '../assets/images/logo.png';
 
 
 const Navbar = () => {
@@ -42,11 +43,11 @@ const Navbar = () => {
           <div className="flex items-center">
             <Link to="/" className="flex items-center">
               <img
-                src="/logo.png"
+                src={logo}
                 alt="Logo"
                 className="h-8 w-8 mr-3 rounded-full"
               />
-              <span className="text-white text-xl font-bold">Online Learning With ChatGPT</span>
+              <span className="text-white text-xl font-bold">Online Learning Platform</span>
             </Link>
           </div>
 

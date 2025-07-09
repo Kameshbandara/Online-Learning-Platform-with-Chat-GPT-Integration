@@ -6,6 +6,7 @@ const jwt = require('jsonwebtoken');
 const axios = require('axios');
 require('dotenv').config();
 
+
 const app = express();
 const PORT = process.env.PORT || 5000;
 
@@ -378,6 +379,69 @@ app.get('/api/user/profile', authenticateToken, async (req, res) => {
     res.status(500).json({ message: 'Server error', error: error.message });
   }
 });
+
+
+
+// Get courses by instructor
+app.get('/api/courses/instructor', authenticateToken, requireRole(['instructor']), async (req, res) => {
+  try {
+    const courses = await Course.find({ instructor: req.user.userId })
+      .populate('instructor', 'name email')
+      .sort({ createdAt: -1 });
+    
+    res.json(courses);
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+});
+
+// Get instructor statistics
+app.get('/api/instructor/stats', authenticateToken, requireRole(['instructor']), async (req, res) => {
+  try {
+    const instructorCourses = await Course.find({ instructor: req.user.userId });
+    
+    const stats = {
+      totalCourses: instructorCourses.length,
+      totalStudents: instructorCourses.reduce((total, course) => total + course.students.length, 0),
+      totalRevenue: instructorCourses.reduce((total, course) => total + (course.price * course.students.length), 0),
+      activeEnrollments: instructorCourses.reduce((total, course) => total + course.students.length, 0)
+    };
+    
+    res.json(stats);
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+});
+
+// Get student's enrolled courses
+app.get('/api/courses/my-courses', authenticateToken, requireRole(['student']), async (req, res) => {
+  try {
+    const user = await User.findById(req.user.userId);
+    const enrollments = [];
+    
+    for (const courseId of user.enrolledCourses) {
+      const course = await Course.findById(courseId).populate('instructor', 'name email');
+      if (course) {
+        enrollments.push({
+          _id: courseId,
+          course: course,
+          enrolledAt: user.createdAt, 
+          progress: {
+            completedLessons: 0,
+            totalLessons: 20 
+          }
+        });
+      }
+    }
+    
+    res.json(enrollments);
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+});
+
+
+
 
 // Health check
 app.get('/health', (req, res) => {
