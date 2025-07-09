@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import logo from '../assets/images/logo.png';
+import logo from '../assets/images/logo2.png';
 
 
 const Navbar = () => {
@@ -36,7 +36,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-blue-900 shadow-lg">
+    <nav className="bg-blue-600 shadow-lg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
@@ -45,7 +45,7 @@ const Navbar = () => {
               <img
                 src={logo}
                 alt="Logo"
-                className="h-8 w-8 mr-3 rounded-full"
+                className="h-12 w-12 mr-3 rounded-full"
               />
               <span className="text-white text-xl font-bold">Online Learning Platform</span>
             </Link>
