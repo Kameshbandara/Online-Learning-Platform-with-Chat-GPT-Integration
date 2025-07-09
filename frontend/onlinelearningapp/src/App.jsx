@@ -8,6 +8,7 @@ import MyCourse from './components/MyCourses';
 import Navbar from './components/Navbar';
 import Recommend from './components/Recommend';
 import Register from './components/Register';
+import './index.css';
 
 // Protected Route Component
 const ProtectedRoute = ({ children }) => {
