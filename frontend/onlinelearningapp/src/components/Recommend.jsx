@@ -143,7 +143,7 @@ const Recommend = () => {
       </div>
 
       {/* API Usage Counter */}
-      {/*<div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+      <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
         <div className="flex items-center justify-between">
           <span className="text-sm text-blue-700">API Calls Used</span>
           <span className="text-sm font-medium text-blue-800">{apiCallCount} / {MAX_API_CALLS}</span>
@@ -154,7 +154,7 @@ const Recommend = () => {
             style={{ width: `${(apiCallCount / MAX_API_CALLS) * 100}%` }}
           ></div>
         </div>
-      </div>*/}
+      </div>
 
       {/* Recommendation Form */}
       <div className="bg-white rounded-lg shadow-md p-6 mb-6">
