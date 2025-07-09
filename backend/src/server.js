@@ -16,19 +16,29 @@ app.use(express.json());
 
 // MongoDB connection
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/learning_platform')
+/*mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/learning_platform')
   .then(() => {
     console.log('MongoDB connected successfully');
   })
   .catch((err) => {
     console.error('MongoDB connection failed:', err.message);
-  });
+  });*/
+
+// Connect to MongoDB Atlas
+mongoose.connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+.then(() => console.log("✅ MongoDB connected"))
+.catch(err => console.error("❌ MongoDB connection error:", err));
+
 
   
 //mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/learning_platform', {
   //useNewUrlParser: true,
   //useUnifiedTopology: true,
 //});
+
 
 // User Schema
 const userSchema = new mongoose.Schema({
