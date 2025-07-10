@@ -1,6 +1,36 @@
 #  Online Learning Platform with Chat GPT Integration
 Develop an online learning platform using the MERN stack (MongoDB,  Express.js, React.js/ NextJS, Node.js) and integrate  with GPT-3 to provide course recommendations and personalized assistance
 
+✅ Authentication:
+Secure user registration and login using JWT
+Password hashing with bcrypt
+Role-based access (student/instructor)
+
+📚 Course Management:
+Instructors can create, edit, and delete courses
+Students can view and enroll in courses
+Dynamic course content with categories and levels
+
+🔐 Authorization Middleware:
+Protected routes based on user roles
+Custom token verification
+
+💬 ChatGPT Integration:
+GPT-3.5-based course recommender
+Accepts a prompt and suggests suitable courses based on description, category, and level
+
+📦 Tech Stack:
+Frontend: React, Axios, Tailwind CSS
+Backend: Node.js, Express.js
+Database: MongoDB Atlas
+
+API Integration: OpenAI ChatGPT API
+
+🌐 Deployment:
+Backend hosted on Render
+Frontend deployed on Vercel
+Uses .env files for environment configuration
+
 Project Screenshots
 
 Login
