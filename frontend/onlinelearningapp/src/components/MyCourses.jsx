@@ -39,7 +39,7 @@ const MyCourse = () => {
       
       setLoading(false);
     } catch (err) {
-      setError(`Failed to fetch ${userRole === 'instructor' ? 'created' : 'enrolled'} courses`);
+      //setError(`Failed to fetch ${userRole === 'instructor' ? 'created' : 'enrolled'} courses`);
       setLoading(false);
     }
   };
