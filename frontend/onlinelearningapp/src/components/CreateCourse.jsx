@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import.meta.env.VITE_API_URL
 
 export default function CreateCourse() {
   const navigate = useNavigate();
@@ -44,7 +45,7 @@ export default function CreateCourse() {
       }
 
       const response = await axios.post(
-        'http://localhost:5000/api/courses',
+        `${import.meta.env.VITE_API_URL}/api/courses`,
         {
           title: formData.title,
           description: formData.description,

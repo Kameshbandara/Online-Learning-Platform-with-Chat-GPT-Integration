@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import.meta.env.VITE_API_URL
 
 const CourseList = () => {
   const [courses, setCourses] = useState([]);
@@ -15,7 +16,7 @@ const CourseList = () => {
   const fetchCourses = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get('http://localhost:5000/api/courses', {
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/courses`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setCourses(response.data);
@@ -30,7 +31,7 @@ const CourseList = () => {
     try {
       setEnrollingCourse(courseId);
       const token = localStorage.getItem('token');
-      await axios.post(`http://localhost:5000/api/courses/${courseId}/enroll`, {}, {
+      await axios.post(`${import.meta.env.VITE_API_URL}/api/courses/${courseId}/enroll`, {}, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setEnrollmentMessage('Successfully enrolled in the course!');

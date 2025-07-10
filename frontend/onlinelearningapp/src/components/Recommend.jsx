@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useState } from 'react';
+import.meta.env.VITE_API_URL
 
 const Recommend = () => {
   const [prompt, setPrompt] = useState('');
@@ -60,7 +61,7 @@ const Recommend = () => {
 
       // Fetch available courses from backend
       const token = localStorage.getItem('token');
-      const coursesResponse = await axios.get('http://localhost:5000/api/courses', {
+      const coursesResponse = await axios.get(`${import.meta.env.VITE_API_URL}/api/courses`, {
         headers: { Authorization: `Bearer ${token}` }
       });
 
@@ -116,7 +117,7 @@ const Recommend = () => {
   const handleEnroll = async (courseId) => {
     try {
       const token = localStorage.getItem('token');
-      await axios.post(`http://localhost:5000/api/courses/${courseId}/enroll`, {}, {
+      await axios.post(`${import.meta.env.VITE_API_URL}/api/courses/${courseId}/enroll`, {}, {
         headers: { Authorization: `Bearer ${token}` }
       });
       alert('Successfully enrolled in the course!');

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import.meta.env.VITE_API_URL
 
 const Dashboard = () => {
   const [courses, setCourses] = useState([]);
@@ -22,13 +23,12 @@ const Dashboard = () => {
       const token = localStorage.getItem('token');
       
       // Fetch instructor's courses
-      const coursesResponse = await axios.get('http://localhost:5000/api/courses/instructor', {
+      const coursesResponse = await axios.get(`${import.meta.env.VITE_API_URL}/api/courses/instructor`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setCourses(coursesResponse.data);
-      
       // Fetch dashboard stats
-      const statsResponse = await axios.get('http://localhost:5000/api/instructor/stats', {
+      const statsResponse = await axios.get(`${import.meta.env.VITE_API_URL}/api/instructor/stats`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setStats(statsResponse.data);
@@ -44,7 +44,7 @@ const Dashboard = () => {
     if (window.confirm('Are you sure you want to delete this course?')) {
       try {
         const token = localStorage.getItem('token');
-        await axios.delete(`http://localhost:5000/api/courses/${courseId}`, {
+        await axios.delete(`${import.meta.env.VITE_API_URL}/api/courses/${courseId}`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         setCourses(courses.filter(course => course._id !== courseId));

@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import.meta.env.VITE_API_URL
 
 const MyCourse = () => {
   const [courses, setCourses] = useState([]);
@@ -23,15 +24,16 @@ const MyCourse = () => {
       let response;
       if (user.role === 'instructor') {
         // Fetch courses created by the instructor
-        response = await axios.get('http://localhost:5000/api/courses/instructor/my-courses', {
+        response = await axios.get(`${import.meta.env.VITE_API_URL}/api/courses/instructor/my-courses`, {
           headers: { Authorization: `Bearer ${token}` }
-        });
-        setCourses(response.data);
+      });
+      setCourses(response.data);
       } else {
         // Fetch enrolled courses for students
-        response = await axios.get('http://localhost:5000/api/courses/my-courses', {
+        response = await axios.get(`${import.meta.env.VITE_API_URL}/api/courses/my-courses`, {
           headers: { Authorization: `Bearer ${token}` }
         });
+
         setCourses(response.data);
       }
       
